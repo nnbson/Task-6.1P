@@ -70,6 +70,20 @@ pipeline {
                 echo "The process by which the application is deployed to the production environment and is accessible to its end-users. This phase is actually the transition of the application from the test environment to a live environment, which can be accessed by the public."
                 echo 'Docker – An open-source platform for developers to build, package, deploy, and execute applications in isolated containers. It simplifies the development and deployment of distributed applications while maintaining consistency and scalability across varied environments.'
             }
+            post {
+                success {
+                    emailext to: 'nnbson98@gmail.com',
+                        subject: 'Deploy to Production Status Email: Success',
+                        body: 'Deploy to Production was successful!',
+                        attachLog: true
+                }
+                failure {
+                    emailext to: 'nnbson98@gmail.com',
+                        subject: 'Deploy to Production Status Email: Failed',
+                        body: 'Deploy to Production failed!',
+                        attachLog: true
+                }
+            }
         }
     }
 }
